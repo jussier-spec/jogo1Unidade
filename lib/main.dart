@@ -1,21 +1,19 @@
+import 'package:agents/core/di/agent_configure_providers.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_repository_example/ui/page/home_page.dart';
-import 'package:flutter_repository_example/ui/page/movies_list_page.dart';
+import 'package:agents/ui/page/home_page.dart';
 
 import 'package:provider/provider.dart';
-
-import 'core/di/configure_providers.dart';
 
 Future<void> main() async{
   WidgetsFlutterBinding.ensureInitialized();
 
-  final data = await ConfigureProviders.createDependencyTree();
+  final data = await AgentConfigureProviders.createDependencyTree();
 
   runApp(AppRoot(data: data));
 }
 
 class AppRoot extends StatelessWidget {
-  final ConfigureProviders data;
+  final AgentConfigureProviders data;
 
   const AppRoot({super.key, required this.data});
 

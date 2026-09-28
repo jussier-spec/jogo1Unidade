@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_repository_example/domain/movie.dart';
-import 'package:flutter_repository_example/ui/widgets/movie_card.dart';
+import 'package:agents/domain/movie.dart';
+import 'package:agents/ui/widgets/movie_card.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:provider/provider.dart';
 

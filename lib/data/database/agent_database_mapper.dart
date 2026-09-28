@@ -1,52 +1,49 @@
 
 
 
+import 'package:agents/data/database/entity/agent_database_entity.dart';
+import 'package:agents/domain/agent.dart';
+
 import '../../domain/exception/mapper_exception.dart';
-import '../../domain/movie.dart';
-import 'entity/movie_database_entity.dart';
 
-class DatabaseMapper{
+class AgentDatabaseMapper{
 
-  Movie toMovie(MovieDatabaseEntity entity){
+  Agent toAgent(AgentDatabaseEntity entity){
     try{
-      return Movie(
-          title: entity.title,
-          year: entity.year,
-          extract: entity.extract,
-          imgUrl: entity.imageUrl
+      return Agent(
+          id: entity.id,
+          name: entity.name
       );
     }catch (e){
-      throw MapperException<MovieDatabaseEntity, Movie>(e.toString());
+      throw MapperException<AgentDatabaseEntity, Agent>(e.toString());
     }
   }
 
-  List<Movie> toMovies(List<MovieDatabaseEntity> entities){
-    final List<Movie> movies = [];
-    for (var movieEntity in entities) {
-      movies.add(toMovie(movieEntity));
+  List<Agent> toAgents(List<AgentDatabaseEntity> entities){
+    final List<Agent> agents = [];
+    for (var agenteEntity in entities) {
+      agents.add(toAgent(agenteEntity));
     }
-    return movies;
+    return agents;
   }
 
-  MovieDatabaseEntity toMovieDatabaseEntity(Movie movie){
+  AgentDatabaseEntity toAgentEntity(Agent agent){
     try{
-      return MovieDatabaseEntity(
+      return AgentDatabaseEntity(
           id: null,
-          title: movie.title,
-          year: movie.year,
-          extract: movie.extract,
-          imageUrl: movie.imgUrl
+          name: agent.name!,
+          slug: agent.slug!
       );
     }catch (e){
-      throw MapperException<MovieDatabaseEntity, Movie>(e.toString());
+      throw MapperException<AgentDatabaseEntity, Agent>(e.toString());
     }
   }
 
-  List<MovieDatabaseEntity> toMovieDatabaseEntities(List<Movie> movies){
-    final List<MovieDatabaseEntity> movieDatabaseEntities = [];
-    for (var m in movies) {
-      movieDatabaseEntities.add(toMovieDatabaseEntity(m));
+  List<AgentDatabaseEntity> toAgentsEntities(List<Agent> agents){
+    final List<AgentDatabaseEntity> agentEntities = [];
+    for (var m in agents) {
+      agentEntities.add(toAgentEntity(m));
     }
-    return movieDatabaseEntities;
+    return agentEntities;
   }
 }

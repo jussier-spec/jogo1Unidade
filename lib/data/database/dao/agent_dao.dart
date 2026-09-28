@@ -1,37 +1,37 @@
 
-import 'package:flutter_repository_example/data/database/dao/agent_base_dao.dart';
-import 'package:flutter_repository_example/data/database/entity/agent_entity.dart';
+import 'package:agents/data/database/dao/agent_base_dao.dart';
+import 'package:agents/data/database/entity/agent_database_entity.dart';
 import 'package:sqflite/sqflite.dart';
 
 import '../entity/movie_database_entity.dart';
 
-class AgentDao extends AgentbaseDao {
-  Future<List<AgentEntity>> selectAll({
+class AgentDao extends AgentBaseDao {
+  Future<List<AgentDatabaseEntity>> selectAll({
     int? limit,
     int? offset,
   }) async {
     final Database db = await getDb();
     final List<Map<String, dynamic>> maps = await db.query(
-      AgentDatabaseContract.movieTable,
+      AgentDatabaseContract.agentTable,
       limit: limit,
       offset: offset,
       orderBy: '${AgentDatabaseContract.idColumn} ASC',
     );
     return List.generate(maps.length, (i) {
-      return AgentEntity.fromJson(maps[i]);
+      return AgentDatabaseEntity.fromJson(maps[i]);
     });
   }
 
-  Future<void> insert(AgentEntity entity) async {
+  Future<void> insert(AgentDatabaseEntity entity) async {
     final Database db = await getDb();
-    await db.insert(AgentDatabaseContract.movieTable, entity.toJson());
+    await db.insert(AgentDatabaseContract.agentTable, entity.toJson());
   }
 
-  Future<void> insertAll(List<AgentEntity> entities) async {
+  Future<void> insertAll(List<AgentDatabaseEntity> entities) async {
     final Database db = await getDb();
     await db.transaction((transaction) async {
       for (final entity in entities) {
-        transaction.insert(AgentDatabaseContract.movieTable, entity.toJson());
+        transaction.insert(AgentDatabaseContract.agentTable, entity.toJson());
       }
     });
   }
