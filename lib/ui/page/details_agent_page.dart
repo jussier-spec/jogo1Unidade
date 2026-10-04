@@ -1,21 +1,16 @@
+import 'package:agents/domain/agent.dart';
 import 'package:agents/ui/widgets/agent_card.dart';
 import 'package:flutter/material.dart';
 
 class DetailsAgent extends StatelessWidget {
-  final Map<String, dynamic> hero;
+  final Agent hero;
   const DetailsAgent({super.key, required this.hero});
 
   @override
   Widget build(BuildContext context) {
-    final images = hero['images'] as Map<String, dynamic>;
-    final powerstats = hero['powerstats'] as Map<String, dynamic>;
-    final appearance = hero['appearance'] as Map<String, dynamic>;
-    final biography = hero['biography'] as Map<String, dynamic>;
-    final work = hero['work'] as Map<String, dynamic>;
-    final connections = hero['connections'] as Map<String, dynamic>;
 
     return Scaffold(
-      appBar: AppBar(title: Text(hero['name'] ?? 'Detalhes')),
+      appBar: AppBar(title: Text(hero.name ?? 'Detalhes')),
       body: SingleChildScrollView(
         child: Card(
           clipBehavior: Clip.antiAlias,
@@ -40,12 +35,12 @@ class DetailsAgent extends StatelessWidget {
 
                     const SizedBox(height: 12),
 
-                    _buildInfo('Gender', appearance['gender']),
-                    _buildInfo('Race', appearance['race']),
-                    _buildInfo('Height', _listToString(appearance['height'])),
-                    _buildInfo('Weight', _listToString(appearance['weight'])),
-                    _buildInfo('Eye Color', appearance['eyeColor']),
-                    _buildInfo('Hair Color', appearance['hairColor']),
+                    _buildInfo('Gender', hero.appearance!.gender),
+                    _buildInfo('Race', hero.appearance!.race),
+                    _buildInfo('Height', _listToString(hero.appearance!.height)),
+                    _buildInfo('Weight', _listToString(hero.appearance!.weight)),
+                    _buildInfo('Eye Color', hero.appearance!.eyeColor),
+                    _buildInfo('Hair Color', hero.appearance!.hairColor),
 
                     const SizedBox(height: 24),
 
@@ -53,16 +48,16 @@ class DetailsAgent extends StatelessWidget {
 
                     const SizedBox(height: 12),
 
-                    _buildInfo('Full Name', biography['fullName']),
-                    _buildInfo('Alter Egos', biography['alterEgos']),
-                    _buildInfo('Aliases', _listToString(biography['aliases'])),
-                    _buildInfo('Place of Birth', biography['placeOfBirth']),
+                    _buildInfo('Full Name', hero.biography!.fullName),
+                    _buildInfo('Alter Egos', hero.biography!.alterEgos),
+                    _buildInfo('Aliases', _listToString(hero.biography!.aliases)),
+                    _buildInfo('Place of Birth', hero.biography!.placeOfBirth),
                     _buildInfo(
                       'First Appearance',
-                      biography['firstAppearance'],
+                      hero.biography!.firstAppearance,
                     ),
-                    _buildInfo('Publisher', biography['publisher']),
-                    _buildInfo('Alignment', biography['alignment']),
+                    _buildInfo('Publisher', hero.biography!.publisher),
+                    _buildInfo('Alignment', hero.biography!.alignment),
 
                     const SizedBox(height: 24),
 
@@ -70,8 +65,8 @@ class DetailsAgent extends StatelessWidget {
 
                     const SizedBox(height: 12),
 
-                    _buildInfo('Occupation', work['occupation']),
-                    _buildInfo('Base', work['base']),
+                    _buildInfo('Occupation', hero.work!.occupation),
+                    _buildInfo('Base', hero.work!.base),
 
                     const SizedBox(height: 24),
 
@@ -81,10 +76,10 @@ class DetailsAgent extends StatelessWidget {
 
                     _buildInfo(
                       'Group Affiliation',
-                      connections['groupAffiliation'],
+                      hero.connections!.groupAffiliation,
                     ),
 
-                    _buildInfo('Relatives', connections['relatives']),
+                    _buildInfo('Relatives', hero.connections!.relatives),
                   ],
                 ),
               ),
@@ -121,32 +116,7 @@ class DetailsAgent extends StatelessWidget {
       ),
     );
   }
-
-  Widget _buildPowerStat(BuildContext context, String name, dynamic value) {
-    final int stat = int.tryParse(value?.toString() ?? '0') ?? 0;
-
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 12),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(name),
-              Text(
-                '$stat',
-                style: const TextStyle(fontWeight: FontWeight.bold),
-              ),
-            ],
-          ),
-          const SizedBox(height: 6),
-          LinearProgressIndicator(value: stat / 100, minHeight: 8),
-        ],
-      ),
-    );
-  }
-
+  
   String _listToString(dynamic value) {
     if (value is List) {
       return value.join(' / ');

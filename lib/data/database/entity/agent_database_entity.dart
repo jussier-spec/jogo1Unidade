@@ -5,7 +5,7 @@ part 'agent_database_entity.g.dart';
 @JsonSerializable()
 class AgentDatabaseEntity {
   @JsonKey(name: AgentDatabaseContract.idColumn)
-  final int? id;
+  final String? id;
 
   @JsonKey(name: AgentDatabaseContract.nameColumn)
   final String name;

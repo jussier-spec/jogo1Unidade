@@ -1,4 +1,5 @@
 import 'package:agents/data/repository/agent_repository_impl.dart';
+import 'package:agents/ui/widgets/agent_paged_item.dart';
 import 'package:flutter/material.dart';
 import 'package:agents/domain/agent.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
@@ -31,14 +32,19 @@ class _AgentesPageState extends State<AgentesPage> {
   }
 
   @override
-  Widget build(BuildContext context) => PagingListener(
-    controller: _pagingController,
-    builder: (context, state, fetchNextPage) => PagedListView<int, Agent>(
-      state: state,
-      fetchNextPage: fetchNextPage,
-      builderDelegate: PagedChildBuilderDelegate(
-        itemBuilder: (context, item, index) => Text(item.name!),
+  Widget build(BuildContext context){
+   return Scaffold(
+      appBar: AppBar(title: const Text('Agentes')),
+      body: PagingListener(
+      controller: _pagingController,
+      builder: (context, state, fetchNextPage) => PagedListView<int, Agent>(
+        state: state,
+        fetchNextPage: fetchNextPage,
+        builderDelegate: PagedChildBuilderDelegate(
+          itemBuilder: (context, item, index) => AgentPagedItem(hero: item),
+        ),
       ),
-    ),
-  );
+    )
+   );
+  } 
 }

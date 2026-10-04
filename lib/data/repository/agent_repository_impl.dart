@@ -9,7 +9,7 @@ import 'package:agents/domain/agent.dart';
 
 class AgentRepositoryImpl implements AgentRepository {
   final ApiAgents apiClient;
-  final NetworkAgentsMapper networkMapper;
+  //final NetworkAgentsMapper networkMapper;
   final AgentDao agentDao;
   final AgentDatabaseMapper databaseMapper;
 
@@ -17,7 +17,8 @@ class AgentRepositoryImpl implements AgentRepository {
       {required this.agentDao,
       required this.databaseMapper,
       required this.apiClient,
-      required this.networkMapper});
+     // required this.networkMapper
+      });
 
   @override
   Future<List<Agent>> getAgents({ required int page, required int limit}) async {
@@ -28,11 +29,11 @@ class AgentRepositoryImpl implements AgentRepository {
     //   return databaseMapper.toAgents(dbEntities);
     // }  
     //Caso contrário, buscar pela API remota
-    final networkEntity = await apiClient.getAgent(page: page, limit: limit);
-    final agents = networkMapper.toAgents(networkEntity);
+    return await apiClient.getAgent(page: page, limit: limit);
+    //final agents = networkMapper.toAgents(networkEntity);
     //E salvar os dados no banco local para cash
     //agentDao.insertAll(databaseMapper.toAgentsEntities(agents));
 
-    return agents;
+    //return agents;
   }
 }

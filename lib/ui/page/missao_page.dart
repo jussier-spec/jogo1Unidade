@@ -297,7 +297,6 @@ class _MissaoPagePageState extends State<MissaoPage> {
     ];
 
     attributes.shuffle();
-
     attribute = attributes.first;
   }
   void _selectHero(Map<String, dynamic> hero) {

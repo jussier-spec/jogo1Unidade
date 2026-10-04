@@ -8,7 +8,7 @@ part of 'agent_database_entity.dart';
 
 AgentDatabaseEntity _$AgentDatabaseEntityFromJson(Map<String, dynamic> json) =>
     AgentDatabaseEntity(
-      id: (json['id'] as num?)?.toInt(),
+      id: json['id'] as String?,
       name: json['name'] as String,
       slug: json['slug'] as String,
     );

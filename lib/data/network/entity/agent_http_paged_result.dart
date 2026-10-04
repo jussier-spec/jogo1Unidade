@@ -1,3 +1,4 @@
+import 'package:agents/domain/agent.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'agent_http_paged_result.g.dart';
@@ -10,7 +11,7 @@ class AgentHttpPagedResult {
   int last;
   int pages;
   int items;
-  List<AgentEntity> data;
+  List<Agent> data;
 
   AgentHttpPagedResult({
     required this.first,
@@ -21,24 +22,8 @@ class AgentHttpPagedResult {
     required this.items,
     required this.data,
   });
+  factory AgentHttpPagedResult.fromJson(Map<String, dynamic> json) =>
+      _$AgentHttpPagedResultFromJson(json);
 
-  factory AgentHttpPagedResult.fromJson(Map<String, dynamic> json) => _$AgentHttpPagedResultFromJson(json);
-}
-
-@JsonSerializable()
-class AgentEntity {
-  String name;
-  int id;
-
-  AgentEntity({
-    required this.name,
-    required this.id
-  });
-
-  factory AgentEntity.fromJson(Map<String, dynamic> json) => _$AgentEntityFromJson(json);
-
-  @override
-  String toString() {
-    return 'AgentEntityEntity';
-  }
+  Map<String, dynamic> toJson() => _$AgentHttpPagedResultToJson(this);
 }

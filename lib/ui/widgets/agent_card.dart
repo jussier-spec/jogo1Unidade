@@ -1,14 +1,15 @@
+import 'package:agents/data/repository/agent_repository_impl.dart';
+import 'package:agents/domain/agent.dart';
 import 'package:flutter/material.dart';
 
 class AgentCard extends StatelessWidget {
-  final Map<String, dynamic> hero;
-
+  final Agent hero;
   const AgentCard({super.key, required this.hero});
 
   @override
   Widget build(BuildContext context) {
-    final images = hero['images'] as Map<String, dynamic>;
-    final powerstats = hero['powerstats'] as Map<String, dynamic>;
+    final images = hero.images;
+    final powerstats = hero.powerstats;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -16,7 +17,7 @@ class AgentCard extends StatelessWidget {
           width: double.infinity,
           height: 250,
           child: Image.network(
-            images['lg'],
+            images!.lg.toString(),
             fit: BoxFit.cover,
             errorBuilder: (context, error, stackTrace) {
               return const Center(child: Icon(Icons.broken_image, size: 60));
@@ -37,7 +38,7 @@ class AgentCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                hero['name'] ?? '-',
+                hero.name ?? '-',
                 style: Theme.of(context).textTheme.headlineSmall
                     ?.copyWith(fontWeight: FontWeight.bold),
               ),
@@ -51,18 +52,18 @@ class AgentCard extends StatelessWidget {
               _buildPowerStat(
                 context,
                 'Intelligence',
-                powerstats['intelligence'],
+                powerstats!.intelligence,
               ),
 
-              _buildPowerStat(context, 'Strength', powerstats['strength']),
+              _buildPowerStat(context, 'Strength', powerstats.strength),
 
-              _buildPowerStat(context, 'Speed', powerstats['speed']),
+              _buildPowerStat(context, 'Speed', powerstats.speed),
 
-              _buildPowerStat(context, 'Durability', powerstats['durability']),
+              _buildPowerStat(context, 'Durability', powerstats.durability),
 
-              _buildPowerStat(context, 'Power', powerstats['power']),
+              _buildPowerStat(context, 'Power', powerstats.power),
 
-              _buildPowerStat(context, 'Combat', powerstats['combat']),
+              _buildPowerStat(context, 'Combat', powerstats.combat),
             ],
           ),
         ),

@@ -1,7 +1,8 @@
+import 'package:agents/domain/agent.dart';
 import 'package:flutter/material.dart';
 
 class AgentListItem extends StatelessWidget {
-  final Map<String, dynamic> hero;
+  final Agent hero;
   final VoidCallback? onTap;
 
   const AgentListItem({
@@ -12,10 +13,10 @@ class AgentListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final images = hero['images'] as Map<String, dynamic>;
-    final powerstats = hero['powerstats'] as Map<String, dynamic>;
+    final images = hero.images as Map<String, dynamic>;
+    final powerstats = hero.powerstats as Map<String, dynamic>;
 
-    final name = hero['name'] ?? '-';
+    final name = hero.name ?? '-';
     final strength = powerstats['strength'] ?? 0;
 
     return Card(

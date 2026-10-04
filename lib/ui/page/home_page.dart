@@ -1,3 +1,5 @@
+import 'package:agents/data/repository/agent_repository_impl.dart';
+import 'package:agents/domain/agent.dart';
 import 'package:agents/ui/page/agentes_page.dart';
 import 'package:agents/ui/page/contrato_diario.dart';
 import 'package:agents/ui/page/meu_esquadrao_page.dart';
@@ -11,73 +13,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
-  // late final MovieRepositoryImpl moviesRepo;
-  // late final PagingController<int, Movie> _pagingController = PagingController<int, Movie>(
-  //   getNextPageKey: (state) => state.lastPageIsEmpty ? null : state.nextIntPageKey,
-  //   fetchPage: (pageKey) => moviesRepo.getMovies(page: pageKey, limit: 10)
-  // );
-    final Map<String, dynamic> hero = {
-    "id": 1,
-    "name": "A-Bomb",
-    "slug": "1-a-bomb",
-    "powerstats": {
-      "intelligence": 38,
-      "strength": 100,
-      "speed": 17,
-      "durability": 80,
-      "power": 24,
-      "combat": 64
-    },
-    "appearance": {
-      "gender": "Male",
-      "race": "Human",
-      "height": [
-        "6'8",
-        "203 cm"
-      ],
-      "weight": [
-        "980 lb",
-        "441 kg"
-      ],
-      "eyeColor": "Yellow",
-      "hairColor": "No Hair"
-    },
-    "biography": {
-      "fullName": "Richard Milhouse Jones",
-      "alterEgos": "No alter egos found.",
-      "aliases": [
-        "Rick Jones"
-      ],
-      "placeOfBirth": "Scarsdale, Arizona",
-      "firstAppearance":
-          "Hulk Vol 2 #2 (April, 2008) (as A-Bomb)",
-      "publisher": "Marvel Comics",
-      "alignment": "good"
-    },
-    "work": {
-      "occupation":
-          "Musician, adventurer, author; formerly talk show host",
-      "base": "-"
-    },
-    "connections": {
-      "groupAffiliation":
-          "Hulk Family; Excelsior (sponsor), Avengers (honorary member); formerly partner of the Hulk, Captain America and Captain Marvel; Teen Brigade; ally of Rom",
-      "relatives":
-          "Marlo Chandler-Jones (wife); Polly (aunt); Mrs. Chandler (mother-in-law); Keith Chandler, Ray Chandler, three unidentified others (brothers-in-law); unidentified father (deceased); Jackie Shorr (alleged mother; unconfirmed)"
-    },
-    "images": {
-      "xs":
-          "https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/images/xs/1-a-bomb.jpg",
-      "sm":
-          "https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/images/sm/1-a-bomb.jpg",
-      "md":
-          "https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/images/md/1-a-bomb.jpg",
-      "lg":
-          "https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/images/lg/1-a-bomb.jpg"
-    }
-  }; 
-
+ // late final AgentRepositoryImpl agentRepo;
+  late final Agent hero;
+   //hero = agentRepo.apiClient.getAgentById(id: 1).asStream().first as Agent;
   void _navigateTo(
     BuildContext context,
     Widget page,
@@ -123,7 +61,7 @@ class _HomePageState extends State<HomePage> {
               onTap: () {
                 _navigateTo(
                   context,
-                  ContratoDiarioPage(hero: hero,),
+                  ContratoDiarioPage(),
                 );
               },
             ),

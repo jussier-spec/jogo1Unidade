@@ -16,7 +16,7 @@ AgentHttpPagedResult _$AgentHttpPagedResultFromJson(
   pages: (json['pages'] as num).toInt(),
   items: (json['items'] as num).toInt(),
   data: (json['data'] as List<dynamic>)
-      .map((e) => AgentEntity.fromJson(e as Map<String, dynamic>))
+      .map((e) => Agent.fromJson(e as Map<String, dynamic>))
       .toList(),
 );
 
@@ -31,9 +31,3 @@ Map<String, dynamic> _$AgentHttpPagedResultToJson(
   'items': instance.items,
   'data': instance.data,
 };
-
-AgentEntity _$AgentEntityFromJson(Map<String, dynamic> json) =>
-    AgentEntity(name: json['name'] as String, id: (json['id'] as num).toInt());
-
-Map<String, dynamic> _$AgentEntityToJson(AgentEntity instance) =>
-    <String, dynamic>{'name': instance.name, 'id': instance.id};

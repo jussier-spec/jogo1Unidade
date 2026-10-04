@@ -14,12 +14,12 @@ class AgentConfigureProviders {
   static Future<AgentConfigureProviders> createDependencyTree() async {
     final agent_dao = AgentDao();
     final api_client = ApiAgents(baseUrl: "http://localhost:3000");
-    final network_mapper = NetworkAgentsMapper();
+    //final network_mapper = NetworkAgentsMapper();
     final database_mapper = AgentDatabaseMapper();
 
     final agents_repository = AgentRepositoryImpl(
         apiClient: api_client,
-        networkMapper: network_mapper,
+        //networkMapper: network_mapper,
         databaseMapper: database_mapper,
         agentDao: agent_dao
     );
@@ -27,7 +27,7 @@ class AgentConfigureProviders {
     return AgentConfigureProviders(providers: [
       Provider<AgentDao>.value(value: agent_dao),
       Provider<ApiAgents>.value(value: api_client),
-      Provider<NetworkAgentsMapper>.value(value: network_mapper),
+     // Provider<NetworkAgentsMapper>.value(value: network_mapper),
       Provider<AgentDatabaseMapper>.value(value: database_mapper),
       Provider<AgentRepositoryImpl>.value(value: agents_repository),
     ]);
