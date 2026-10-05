@@ -42,24 +42,4 @@ class ApiAgents {
       throw Exception('Unknown error');
     }
   }
-  
-
-
-  Future<List<Agent>> getAgentById({required int id}) async {
-    final     response = await _dio.get(
-      "/agents/$id",
-    );
-    if (response.statusCode != null && response.statusCode! >= 400) {
-      throw NetworkException(
-        statusCode: response.statusCode!,
-        message: response.statusMessage,
-      );
-    } else if (response.statusCode != null) {
-      final AgentHttpPagedResult receivedData = AgentHttpPagedResult.fromJson(response.data as Map<String, dynamic>);
-
-      return receivedData.data;
-    } else {
-      throw Exception('Unknown error');
-    }
-  }
 }

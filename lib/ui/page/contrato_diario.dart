@@ -21,7 +21,7 @@ class _ContratoDiarioPageState extends State<ContratoDiarioPage> {
   Agent? agent;
   bool loading = true;
 
-  final int agentId = 1;
+  
 
   @override
   void initState() {

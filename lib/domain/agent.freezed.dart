@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Agent {
 
- String? get id; String? get name; String? get slug; PowerStats? get powerstats; Appearance? get appearance; Biography? get biography; Work? get work; Connections? get connections; Images? get images;
+@JsonKey(fromJson: stringToInt) int? get id; String? get name; String? get slug; PowerStats? get powerstats; Appearance? get appearance; Biography? get biography; Work? get work; Connections? get connections; Images? get images;
 /// Create a copy of Agent
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -54,7 +54,7 @@ abstract mixin class $AgentCopyWith<$Res>  {
   factory $AgentCopyWith(Agent value, $Res Function(Agent) _then) = _$AgentCopyWithImpl;
 @useResult
 $Res call({
- String? id, String? name, String? slug, PowerStats? powerstats, Appearance? appearance, Biography? biography, Work? work, Connections? connections, Images? images
+@JsonKey(fromJson: stringToInt) int? id, String? name, String? slug, PowerStats? powerstats, Appearance? appearance, Biography? biography, Work? work, Connections? connections, Images? images
 });
 
 
@@ -74,7 +74,7 @@ class _$AgentCopyWithImpl<$Res>
 @pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? name = freezed,Object? slug = freezed,Object? powerstats = freezed,Object? appearance = freezed,Object? biography = freezed,Object? work = freezed,Object? connections = freezed,Object? images = freezed,}) {
   return _then(Agent(
 id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String?,name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as int?,name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String?,slug: freezed == slug ? _self.slug : slug // ignore: cast_nullable_to_non_nullable
 as String?,powerstats: freezed == powerstats ? _self.powerstats : powerstats // ignore: cast_nullable_to_non_nullable
 as PowerStats?,appearance: freezed == appearance ? _self.appearance : appearance // ignore: cast_nullable_to_non_nullable
@@ -239,7 +239,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? id,  String? name,  String? slug,  PowerStats? powerstats,  Appearance? appearance,  Biography? biography,  Work? work,  Connections? connections,  Images? images)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(fromJson: stringToInt)  int? id,  String? name,  String? slug,  PowerStats? powerstats,  Appearance? appearance,  Biography? biography,  Work? work,  Connections? connections,  Images? images)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Agent() when $default != null:
 return $default(_that.id,_that.name,_that.slug,_that.powerstats,_that.appearance,_that.biography,_that.work,_that.connections,_that.images);case _:
@@ -260,7 +260,7 @@ return $default(_that.id,_that.name,_that.slug,_that.powerstats,_that.appearance
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? id,  String? name,  String? slug,  PowerStats? powerstats,  Appearance? appearance,  Biography? biography,  Work? work,  Connections? connections,  Images? images)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(fromJson: stringToInt)  int? id,  String? name,  String? slug,  PowerStats? powerstats,  Appearance? appearance,  Biography? biography,  Work? work,  Connections? connections,  Images? images)  $default,) {final _that = this;
 switch (_that) {
 case _Agent():
 return $default(_that.id,_that.name,_that.slug,_that.powerstats,_that.appearance,_that.biography,_that.work,_that.connections,_that.images);case _:
@@ -280,7 +280,7 @@ return $default(_that.id,_that.name,_that.slug,_that.powerstats,_that.appearance
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? id,  String? name,  String? slug,  PowerStats? powerstats,  Appearance? appearance,  Biography? biography,  Work? work,  Connections? connections,  Images? images)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(fromJson: stringToInt)  int? id,  String? name,  String? slug,  PowerStats? powerstats,  Appearance? appearance,  Biography? biography,  Work? work,  Connections? connections,  Images? images)?  $default,) {final _that = this;
 switch (_that) {
 case _Agent() when $default != null:
 return $default(_that.id,_that.name,_that.slug,_that.powerstats,_that.appearance,_that.biography,_that.work,_that.connections,_that.images);case _:
@@ -295,10 +295,10 @@ return $default(_that.id,_that.name,_that.slug,_that.powerstats,_that.appearance
 @JsonSerializable()
 
 class _Agent implements Agent {
-  const _Agent({required this.id, this.name, this.slug, this.powerstats, this.appearance, this.biography, this.work, this.connections, this.images});
+  const _Agent({@JsonKey(fromJson: stringToInt) required this.id, this.name, this.slug, this.powerstats, this.appearance, this.biography, this.work, this.connections, this.images});
   factory _Agent.fromJson(Map<String, dynamic> json) => _$AgentFromJson(json);
 
-@override final  String? id;
+@override@JsonKey(fromJson: stringToInt) final  int? id;
 @override final  String? name;
 @override final  String? slug;
 @override final  PowerStats? powerstats;
@@ -343,7 +343,7 @@ abstract mixin class _$AgentCopyWith<$Res> implements $AgentCopyWith<$Res> {
   factory _$AgentCopyWith(_Agent value, $Res Function(_Agent) _then) = __$AgentCopyWithImpl;
 @override @useResult
 $Res call({
- String? id, String? name, String? slug, PowerStats? powerstats, Appearance? appearance, Biography? biography, Work? work, Connections? connections, Images? images
+@JsonKey(fromJson: stringToInt) int? id, String? name, String? slug, PowerStats? powerstats, Appearance? appearance, Biography? biography, Work? work, Connections? connections, Images? images
 });
 
 
@@ -363,7 +363,7 @@ class __$AgentCopyWithImpl<$Res>
 @override @pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? name = freezed,Object? slug = freezed,Object? powerstats = freezed,Object? appearance = freezed,Object? biography = freezed,Object? work = freezed,Object? connections = freezed,Object? images = freezed,}) {
   return _then(_Agent(
 id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String?,name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as int?,name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String?,slug: freezed == slug ? _self.slug : slug // ignore: cast_nullable_to_non_nullable
 as String?,powerstats: freezed == powerstats ? _self.powerstats : powerstats // ignore: cast_nullable_to_non_nullable
 as PowerStats?,appearance: freezed == appearance ? _self.appearance : appearance // ignore: cast_nullable_to_non_nullable

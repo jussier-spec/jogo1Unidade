@@ -1,7 +1,8 @@
+import 'package:agents/domain/agent.dart';
 import 'package:flutter/material.dart';
 
 class DesafioDoDia extends StatelessWidget {
-  final Map<String, dynamic> enemy;
+  final Agent enemy;
   final String attribute;
 
   const DesafioDoDia({
@@ -12,7 +13,7 @@ class DesafioDoDia extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final images = enemy['images'] as Map<String, dynamic>;
+    final images = enemy.images;
 
     return Card(
       margin: const EdgeInsets.all(16),
@@ -42,7 +43,7 @@ class DesafioDoDia extends StatelessWidget {
 
             ClipOval(
               child: Image.network(
-                images['md'],
+                images!.md!,
                 width: 120,
                 height: 120,
                 fit: BoxFit.cover,
@@ -52,7 +53,7 @@ class DesafioDoDia extends StatelessWidget {
             const SizedBox(height: 12),
 
             Text(
-              enemy['name'] ?? '-',
+              enemy.name ?? '-',
               style: Theme.of(context)
                   .textTheme
                   .titleLarge

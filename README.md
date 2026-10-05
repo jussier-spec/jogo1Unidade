@@ -4,11 +4,14 @@
 # Api Web Local
 Para executar a aplicação é necessário rodar um json-server utilizando um banco de dados de agents que está em api/agents_db.json.
 Dentro da pasta api rodar o seguinte comando: 
-`npm install i`
-`npx json-server db.json`
+Instalar pacote: `npm install i`
+Rodar a api: `npx json-server db.json`
+
+# Para criar plataformas
+flutter create --platforms=android .
 
 # Baixar os pacotes do flutter
-`pub get`
+`flutter pub get`
 
 # Criação de classes do modelo com frezzed
 Ao mexer em classes privadas que tenham _$ deve rodar o seguinte comando para que seja gerado outra classe com as parte privadas:

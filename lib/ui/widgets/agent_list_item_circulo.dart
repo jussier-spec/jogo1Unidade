@@ -1,8 +1,9 @@
+import 'package:agents/domain/agent.dart';
 import 'package:flutter/material.dart';
 
 class AgentListItemCirculo extends StatelessWidget {
-  final List<Map<String, dynamic>> heroes;
-  final Function(Map<String, dynamic>) onHeroSelected;
+  final List<Agent> heroes;
+  final Function(Agent) onHeroSelected;
 
   const AgentListItemCirculo({
     super.key,
@@ -44,7 +45,7 @@ class AgentListItemCirculo extends StatelessWidget {
               final hero = heroes[index];
 
               final images =
-                  hero['images'] as Map<String, dynamic>;
+                  hero.images;
 
               return GestureDetector(
                 onTap: () {
@@ -59,7 +60,7 @@ class AgentListItemCirculo extends StatelessWidget {
                     children: [
                       ClipOval(
                         child: Image.network(
-                          images['sm'],
+                          images!.sm!,
                           width: 75,
                           height: 75,
                           fit: BoxFit.cover,
@@ -69,7 +70,7 @@ class AgentListItemCirculo extends StatelessWidget {
                       const SizedBox(height: 8),
 
                       Text(
-                        hero['name'] ?? '-',
+                        hero.name ?? '-',
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.center,

@@ -7,7 +7,7 @@ part of 'agent.dart';
 // **************************************************************************
 
 _Agent _$AgentFromJson(Map<String, dynamic> json) => _Agent(
-  id: json['id'] as String?,
+  id: stringToInt(json['id']),
   name: json['name'] as String?,
   slug: json['slug'] as String?,
   powerstats: json['powerstats'] == null

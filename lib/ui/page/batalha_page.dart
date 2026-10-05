@@ -1,8 +1,9 @@
+import 'package:agents/domain/agent.dart';
 import 'package:flutter/material.dart';
 
 class BatalhaPage extends StatelessWidget {
-  final Map<String, dynamic> enemy;
-  final Map<String, dynamic> hero;
+  final Agent enemy;
+  final Agent hero;
   final String attribute;
 
   const BatalhaPage({
@@ -12,14 +13,32 @@ class BatalhaPage extends StatelessWidget {
     required this.attribute,
   });
 
-  int _getAttribute(Map<String, dynamic> character) {
+  int? _getAttribute(Agent character) {
     final powerstats =
-        character['powerstats'] as Map<String, dynamic>;
+        character.powerstats;
 
-    return int.tryParse(
-          powerstats[attribute]?.toString() ?? '0',
-        ) ??
-        0;
+    switch (attribute.toLowerCase()) {
+      case 'intelligence':
+        return powerstats!.intelligence;
+
+      case 'strength':
+        return powerstats!.strength;
+
+      case 'speed':
+        return powerstats!.speed;
+
+      case 'durability':
+        return powerstats!.durability;
+
+      case 'power':
+        return powerstats!.power;
+
+      case 'combat':
+        return powerstats!.combat;
+
+      default:
+        return 0;
+      }
   }
 
   void _showResult(BuildContext context) {
@@ -29,7 +48,7 @@ class BatalhaPage extends StatelessWidget {
     String message;
     Color color;
 
-    if (heroValue > enemyValue) {
+    if (heroValue! > enemyValue!) {
       message = 'sucesso na rodada';
       color = Colors.green;
     } else if (heroValue < enemyValue) {
@@ -52,10 +71,10 @@ class BatalhaPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final heroImages =
-        hero['images'] as Map<String, dynamic>;
+        hero.images;
 
     final enemyImages =
-        enemy['images'] as Map<String, dynamic>;
+        enemy.images;
 
     final heroValue = _getAttribute(hero);
     final enemyValue = _getAttribute(enemy);
@@ -87,8 +106,8 @@ class BatalhaPage extends StatelessWidget {
               children: [
                 _buildCharacter(
                   context,
-                  hero['name'],
-                  heroImages['md']
+                  hero.name,
+                  heroImages!.md!
                 ),
 
                 const Text(
@@ -101,8 +120,8 @@ class BatalhaPage extends StatelessWidget {
 
                 _buildCharacter(
                   context,
-                  enemy['name'],
-                  enemyImages['md']
+                  enemy.name,
+                  enemyImages!.md!
                 ),
               ],
             ),

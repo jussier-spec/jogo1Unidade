@@ -3,10 +3,14 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'agent.freezed.dart';
 part 'agent.g.dart';
 
+
+int stringToInt(dynamic value) { if (value is int) { return value; } return int.parse(value.toString()); }
+
 @freezed
 abstract class Agent with _$Agent {
   const factory Agent({
-    required String? id,
+     @JsonKey(fromJson: stringToInt)
+    required int? id,
     String? name,
     String? slug,
     PowerStats? powerstats,
@@ -16,6 +20,7 @@ abstract class Agent with _$Agent {
     Connections? connections,
     Images? images,
   }) = _Agent;
+
 
   factory Agent.fromJson(Map<String, dynamic> json) =>
       _$AgentFromJson(json);
@@ -31,6 +36,7 @@ abstract class PowerStats with _$PowerStats {
     int? power,
     int? combat,
   }) = _PowerStats;
+  
 
   factory PowerStats.fromJson(Map<String, dynamic> json) =>
       _$PowerStatsFromJson(json);
