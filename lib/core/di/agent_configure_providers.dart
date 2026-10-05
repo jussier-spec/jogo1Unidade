@@ -9,7 +9,7 @@ class AgentConfigureProviders {
   AgentConfigureProviders({required this.providers});
   static Future<AgentConfigureProviders> createDependencyTree() async {
     final agent_dao = AgentDao();
-    final api_client = ApiAgents(baseUrl: "http://localhost:3000");
+    final api_client = ApiAgents(baseUrl: "http://10.0.0.202:3000");
 
     final agents_repository = AgentRepositoryImpl(
         apiClient: api_client,

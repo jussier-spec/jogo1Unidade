@@ -8,11 +8,9 @@ import 'package:agents/domain/agent.dart';
 class AgentRepositoryImpl implements AgentRepository {
   final ApiAgents apiClient;
   final AgentDao agentDao;
-  // final AgentDatabaseMapper databaseMapper;
 
   AgentRepositoryImpl(
       {required this.agentDao,
-      // required this.databaseMapper,
       required this.apiClient
       });
 

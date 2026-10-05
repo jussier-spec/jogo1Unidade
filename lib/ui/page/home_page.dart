@@ -1,5 +1,3 @@
-import 'package:agents/data/repository/agent_repository_impl.dart';
-import 'package:agents/domain/agent.dart';
 import 'package:agents/ui/page/agentes_page.dart';
 import 'package:agents/ui/page/contrato_diario.dart';
 import 'package:agents/ui/page/meu_esquadrao_page.dart';
@@ -13,9 +11,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
- // late final AgentRepositoryImpl agentRepo;
-  late final Agent hero;
-   //hero = agentRepo.apiClient.getAgentById(id: 1).asStream().first as Agent;
   void _navigateTo(
     BuildContext context,
     Widget page,

@@ -13,11 +13,11 @@ class AgentListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final images = hero.images as Map<String, dynamic>;
-    final powerstats = hero.powerstats as Map<String, dynamic>;
+    final images = hero.images;
+    final powerstats = hero.powerstats;
 
     final name = hero.name ?? '-';
-    final strength = powerstats['strength'] ?? 0;
+    final strength = powerstats!.strength ?? 0;
 
     return Card(
       margin: const EdgeInsets.symmetric(
@@ -35,7 +35,7 @@ class AgentListItem extends StatelessWidget {
               ClipRRect(
                 borderRadius: BorderRadius.circular(8),
                 child: Image.network(
-                  images['sm'],
+                  images!.sm!,
                   width: 80,
                   height: 80,
                   fit: BoxFit.cover,

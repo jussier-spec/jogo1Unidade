@@ -76,9 +76,6 @@ class BatalhaPage extends StatelessWidget {
     final enemyImages =
         enemy.images;
 
-    final heroValue = _getAttribute(hero);
-    final enemyValue = _getAttribute(enemy);
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Batalha'),

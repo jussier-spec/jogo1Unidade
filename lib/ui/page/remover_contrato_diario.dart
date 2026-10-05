@@ -1,29 +1,26 @@
 import 'package:agents/data/database/dao/agent_dao.dart';
-import 'package:agents/data/network/client/api_agents.dart';
 import 'package:agents/domain/agent.dart';
 import 'package:agents/ui/widgets/agent_card.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'dart:math';
 
-class ContratoDiarioPage extends StatefulWidget {
-  const ContratoDiarioPage({
+class RemoverContratoDiario extends StatefulWidget {
+  final Agent hero;
+  const RemoverContratoDiario({
     super.key,
+    required this.hero
   });
 
   @override
-  State<ContratoDiarioPage> createState() => _ContratoDiarioPageState();
+  State<RemoverContratoDiario> createState() => _RemoverContratoDiarioState();
 }
 
-class _ContratoDiarioPageState extends State<ContratoDiarioPage> {
+class _RemoverContratoDiarioState extends State<RemoverContratoDiario> {
   Agent? agent;
   bool loading = true;
   @override
   void initState() {
     super.initState();
-
-    // Espera o widget estar inserido na árvore
-    // para acessar o Provider.
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _loadAgent();
     });
@@ -31,15 +28,17 @@ class _ContratoDiarioPageState extends State<ContratoDiarioPage> {
 
   Future<void> _loadAgent() async {
     try {
-      final apiClient = context.read<ApiAgents>();
-
-      final agents = await apiClient.getAgent(page: 1, limit: 50);
+      final agentDao = context.read<AgentDao>();
+      final esquadrao = await agentDao.selectAgentsEsquadrao();
+      for (var agentEsquadrao in esquadrao) {
+          if(agentEsquadrao.id == widget.hero.id) {
+            agent = agentEsquadrao;
+          }
+      }
 
       if (!mounted) return;
 
       setState(() {
-        final random = Random();
-        agent = agents.isNotEmpty ? agents.elementAt(random.nextInt(50)) : null;
         loading = false;
       });
     } catch (e) {
@@ -59,37 +58,23 @@ class _ContratoDiarioPageState extends State<ContratoDiarioPage> {
     }
   }
 
-  Future<void> _insertAgentInEsquadrao(int id) async {
+  Future<void> _deleteAgentEsquadrao(int id) async {
     try {
       final agentDao = context.read<AgentDao>();
-      final esquadrao = await agentDao.selectAgentsEsquadrao();
-      if(esquadrao.length >= 15){
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('O esquadrão já está com a capacidade máxima.'),
-            backgroundColor: Colors.orangeAccent,
-            duration: const Duration(seconds: 2),
-          ),
-        );
-        return;
-      }
-      await agentDao.insertAgentInEsquadrao(id);
-      if (!mounted) return;
+      await agentDao.deleteAgentEsquadrao(id);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Contratacão removida com sucesso'),
+          backgroundColor: Colors.lime,
+          duration: const Duration(seconds: 2),
+        ),
+      );
 
-      setState(() {
-        loading = false;
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Agente contratado.'),
-            backgroundColor: Colors.greenAccent,
-            duration: const Duration(seconds: 2),
-          ),
-        );
-      });
+      if (!mounted) return;
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Não foi possível contratar um agente no momento.'),
+          content: Text('Não foi possível remover a contratacão do agente no momento.'),
           backgroundColor: Colors.orangeAccent,
           duration: const Duration(seconds: 2),
         ),
@@ -145,10 +130,10 @@ class _ContratoDiarioPageState extends State<ContratoDiarioPage> {
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
-                  _insertAgentInEsquadrao(agent!.id);
+                  _deleteAgentEsquadrao(agent!.id);
                 },
                 style: raisedButtonStyle,
-                child: const Text('Recrutar'),
+                child: const Text('Remover'),
               ),
             ),
 

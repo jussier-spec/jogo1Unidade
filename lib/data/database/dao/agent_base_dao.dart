@@ -5,7 +5,7 @@ import 'package:sqflite/sqflite.dart';
 import '../entity/agent_database_entity.dart';
 
 abstract class AgentBaseDao {
-  static const databaseVersion = 1;
+  static const databaseVersion = 2;
   static const _databaseName = 'agent_database.db';
 
   Database? _database;
@@ -164,5 +164,19 @@ abstract class AgentBaseDao {
         )
       );
     ''');
+
+    batch.execute(
+      '''
+      CREATE TABLE ${AgentDatabaseContract.esquadraoTable} (
+        ${AgentDatabaseContract.agentIdColumn} INTEGER PRIMARY KEY,
+        FOREIGN KEY (
+          ${AgentDatabaseContract.agentIdColumn}
+        )
+        REFERENCES ${AgentDatabaseContract.agentTable} (
+          ${AgentDatabaseContract.idColumn}
+        )
+      );
+    '''
+    );
   }
 }

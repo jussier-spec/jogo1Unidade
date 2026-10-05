@@ -94,4 +94,9 @@ class AgentDatabaseContract {
   static const smColumn = 'sm';
   static const mdColumn = 'md';
   static const lgColumn = 'lg';
+
+
+  // Meu Esquadrão
+  static const esquadraoTable = 'agent_esquadrao';
+
 }
